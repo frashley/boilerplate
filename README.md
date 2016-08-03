@@ -1,5 +1,5 @@
-# cs-brand
-Microsite for brand.codescience.com
+# Basic Prototype Boilerplate
+Simple gulp boilerplate for basic static prototyping
 
 1. Clone repo.
 2. `npm install`
