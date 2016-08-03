@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     del = require('del'),
+    babel = require('gulp-babel'),
     uglify = require('gulp-uglify'),
+    pump = require('pump'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     htmlmin = require('gulp-htmlmin'),
@@ -37,15 +39,20 @@ gulp.task('sass', function () {
             browsers: ['last 2 versions']
         })]))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/assets/styles'));
+        .pipe(gulp.dest('dist/assets/styles'))
+        .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function () {
-    return gulp.src([
-            'src/assets/js/main.js'
-        ])
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('dist/assets/js'));
+gulp.task('scripts', function (cb) {
+    pump([
+        gulp.src('src/assets/js/**/*.js'),
+        babel({
+            presets: ['es2015']
+        }),
+        concat('main.js'),
+        uglify(),
+        gulp.dest('dist/assets/js')
+    ], cb);
 });
 
 gulp.task('fonts', function () {
@@ -85,9 +92,9 @@ gulp.task('serve', [], function () {
 
     gulp.watch('src/**/*.html', ['html']);
     gulp.watch('src/assets/scss/**/*.scss', ['sass']);
-    gulp.watch('src/assets/**/*.js', ['scripts']);
+    gulp.watch('src/assets/js/**/*.js', ['scripts']);
     gulp.watch('dist/assets/images/**/*', ['images']);
 
-    gulp.watch('src/**/*.html').on('change', reload);
-    gulp.watch('dist/main.js').on('change', reload);
+    gulp.watch('dist/**/*.html').on('change', reload);
+    gulp.watch('dist/assets/js/main.js').on('change', reload);
 });
