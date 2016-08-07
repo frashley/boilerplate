@@ -1,13 +1,11 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
-    del = require('del'),
     babel = require('gulp-babel'),
     uglify = require('gulp-uglify'),
     pump = require('pump'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     htmlmin = require('gulp-htmlmin'),
-    cssnano = require('gulp-cssnano'),
     postcss = require('gulp-postcss'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('autoprefixer'),
@@ -50,8 +48,9 @@ gulp.task('scripts', function (cb) {
             presets: ['es2015']
         }),
         concat('main.js'),
+        gulp.dest('dist/assets/js'),
         uglify(),
-        gulp.dest('dist/assets/js')
+        rename('main.min.js')
     ], cb);
 });
 
