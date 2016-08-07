@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     pump = require('pump'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
+    fileinclude = require('gulp-file-include'),
     htmlmin = require('gulp-htmlmin'),
     postcss = require('gulp-postcss'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -21,8 +22,20 @@ var sassOptions = {
     precision: 8
 };
 
+gulp.task('include', function () {
+    gulp.src('src/includes/**/*.html')
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '/'
+        }));
+});
+
 gulp.task('html', function () {
     return gulp.src('src/**/*.html')
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
@@ -50,9 +63,11 @@ gulp.task('scripts', function (cb) {
         concat('main.js'),
         gulp.dest('dist/assets/js'),
         uglify(),
-        rename('main.min.js')
+        rename('main.min.js'),
+        gulp.dest('dist/assets/js')
     ], cb);
 });
+
 
 gulp.task('fonts', function () {
     return gulp.src([

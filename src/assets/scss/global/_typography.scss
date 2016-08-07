@@ -3,6 +3,9 @@ html {
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+}
 
+body {
+    @include setType(16);
     @include setRelativeType();
 }

@@ -1,12 +1,3 @@
-// utilities
-@import 'utilities/mixins';
-
-// modules
-@import 'modules/typesetter';
-@import 'modules/grid';
-@import 'modules/card-grid';
-
-// globals
-@import 'global/reset';
-@import 'global/typography';
-@import 'global/color';
+@import 'utilities/_index';
+@import 'modules/_index';
+@import 'global/_index';
