@@ -1,3 +1,6 @@
+$typography-main: "Helvetica Neue",Helvetica,Arial,sans-serif;
+$typography-heading: Georgia,Times,"Times New Roman",serif;
+
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -8,4 +11,34 @@ html {
 body {
     @include setType(16);
     @include setRelativeType();
+
+    font-family: $typography-main;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt {
+    font-family: $typography-heading;
+}
+
+ul,
+ol {
+    padding-left: 1rem;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
+}
+
+dt {
+    font-weight: 700;
+    margin-top: 24px;
 }

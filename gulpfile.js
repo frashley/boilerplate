@@ -56,7 +56,10 @@ gulp.task('sass', function () {
 
 gulp.task('scripts', function (cb) {
     pump([
-        gulp.src('src/assets/js/**/*.js'),
+        gulp.src([
+            'node_modules/prismjs/prism.js',
+            'src/assets/js/**/*.js'
+        ]),
         babel({
             presets: ['es2015']
         }),
