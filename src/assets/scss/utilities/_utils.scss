@@ -9,3 +9,18 @@
         clear: both;
     }
 }
+
+.anchor {
+    color: $color-anchor;
+
+    &:hover,
+    &:focus {
+        color: darken($color-anchor, 10%);
+    }
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -29,6 +29,8 @@ $grid-breakpoints: (
 .grid,
 .layout,
 .row {
+    @include setType(16, 0);
+
     align-content: flex-start;
     align-items: stretch;
     display: flex;
@@ -50,6 +52,22 @@ $grid-breakpoints: (
     }
 
     @include mediaQuery(map-get($grid-breakpoints, small)) {
+        &.auto {
+            margin: 0 -1rem;
+
+            .col {
+                flex-basis: auto;
+            }
+        }
+
+        &.inline {
+            margin: 0 -1rem;
+
+            .col {
+                flex: inherit;
+            }
+        }
+
         &.sixty-forty {
             margin: 0 -1rem;
 

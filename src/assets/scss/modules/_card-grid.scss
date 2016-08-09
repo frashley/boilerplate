@@ -36,7 +36,6 @@ $card-grid-map: (
 
 @mixin make-card-grid-columns($map: $card-grid-map) {
     @each $size, $data in $map {
-        @debug(Breakpoint Size: map-get(map-get($map, #{$size}), breakpoint));
         @include card-grid-column(map-get($data, breakpoint), map-get($data, col-width));
     }
 }

@@ -1,3 +1,4 @@
+$typesetter-horizontal-debug: true;
 $typesetter-browser-context: 16;
 $typesetter-baseline: 24;
 $typesetter-breakpoints: (
@@ -9,31 +10,31 @@ $typesetter-breakpoints: (
 $typesetter-map: (
     h1: (
         default: 24,
-        small: 36,
-        medium: 48,
-        large: 60,
-        x-large: 70
+        small: 30,
+        medium: 36,
+        large: 40,
+        x-large: 46
     ),
     h2: (
-        default: 20,
-        small: 24,
+        default: 22,
+        small: 26,
         medium: 30,
-        large: 35,
-        x-large: 40
+        large: 34,
+        x-large: 38
     ),
     h3: (
-        default: 18,
+        default: 20,
         small: 22,
-        medium: 30,
-        large: 30,
-        x-large: 40
-    ),
-    h4: (
-        default: 16,
-        small: 18,
         medium: 24,
         large: 26,
-        x-large: 32
+        x-large: 28
+    ),
+    h4: (
+        default: 18,
+        small: 20,
+        medium: 22,
+        large: 24,
+        x-large: 26
     ),
     h5: (
         default: 16,
@@ -78,9 +79,6 @@ $typesetter-map: (
         x-large: 16
     )
 );
-
-/* Debug settings */
-$typesetter-horizontal-debug: true;
 
 @function rem($pixels, $context: $typesetter-browser-context) {
     @return #{$pixels/$context}rem;
@@ -144,27 +142,19 @@ $typesetter-horizontal-debug: true;
     }
 }
 
-%setDefaultType {
-    @include setType(16);
-}
-
 @mixin setRelativeType() {
     // Set default sizes
-    @each $selector, $sizes in $typesetter-map {
-        #{$selector}, .#{$selector} {
-            @include setType(map-get($sizes, default));
-        }
-    }
-
     ul, ol, dl,
     td, th, caption,
     blockquote, pre, var, code,
     legend, input, textarea, select, label {
-        @extend %setDefaultType;
+        @include setType(16);
     }
 
-    input, textarea, select, label {
-        margin: 0;
+    @each $selector, $sizes in $typesetter-map {
+        #{$selector}, .#{$selector} {
+            @include setType(map-get($sizes, default));
+        }
     }
 
     // Set responsive sizes

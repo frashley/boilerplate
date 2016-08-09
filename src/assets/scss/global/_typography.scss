@@ -1,16 +1,13 @@
 $typography-main: "Helvetica Neue",Helvetica,Arial,sans-serif;
 $typography-heading: Georgia,Times,"Times New Roman",serif;
 
+@include setRelativeType();
+
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-}
-
-body {
-    @include setType(16);
-    @include setRelativeType();
 
     font-family: $typography-main;
 }
