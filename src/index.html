@@ -1,15 +1,8 @@
-@@include('./includes/masthead.html')
+{% extends "_layout.html" %}
 
-<div class="container">
-    <h1>Pattern Library</h1>
-</div>
-
-@@include('./includes/styleguide/typography.html')
-@@include('./includes/styleguide/layouts.html')
-@@include('./includes/styleguide/grids.html')
-@@include('./includes/styleguide/modules/card-grid.html')
-@@include('./includes/styleguide/forms.html')
-@@include('./includes/styleguide/buttons.html')
-
-
-@@include('./includes/footer.html')
+{% block content %}
+    <div class="container">
+        <h1>Hi.</h1>
+        <p>Check out the <a href="/pattern-library/">Pattern Library</a>.</p>
+    </div>
+{% endblock %}

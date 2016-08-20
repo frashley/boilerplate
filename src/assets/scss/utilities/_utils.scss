@@ -24,3 +24,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.sr-only {
+    position: absolute;
+    left: -9999em;
+}
