@@ -5,7 +5,9 @@ var gulp = require('gulp'),
     pump = require('pump'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
-    fileinclude = require('gulp-file-include'),
+    nunjucksRender = require('gulp-nunjucks-render'),
+    data = require('gulp-data'),
+    fs = require('fs'),
     htmlmin = require('gulp-htmlmin'),
     postcss = require('gulp-postcss'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -22,20 +24,16 @@ var sassOptions = {
     precision: 8
 };
 
-gulp.task('include', function () {
-    gulp.src('src/includes/**/*.html')
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '/'
-        }));
-});
-
 gulp.task('html', function () {
-    return gulp.src('src/**/*.html')
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
+    return gulp.src('src/**/*.+(html|nunjucks)')
+        .pipe(data(function () {
+            return JSON.parse(fs.readFileSync('./src/mocks.json'));
         }))
+        .pipe(nunjucksRender({
+            path: ['src']
+        }))
+        // output files in app folder
+        .pipe(gulp.dest('dist/unminified'))
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
@@ -102,12 +100,14 @@ gulp.task('default', ['build']);
 
 gulp.task('serve', [], function () {
     browserSync.init({
+        notify: false,
         server: {
             baseDir: './dist'
         }
     });
 
     gulp.watch('src/**/*.html', ['html']);
+    gulp.watch('src/mocks.json', ['html']);
     gulp.watch('src/assets/scss/**/*.scss', ['sass']);
     gulp.watch('src/assets/js/**/*.js', ['scripts']);
     gulp.watch('dist/assets/images/**/*', ['images']);

@@ -63,3 +63,12 @@ html {
 *:after {
     box-sizing: inherit;
 }
+
+a {
+    color: $color-anchor;
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+}
