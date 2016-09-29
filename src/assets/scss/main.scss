@@ -3,3 +3,11 @@
 @import 'utilities/_index';
 @import 'components/_index';
 @import 'third-party/_index';
+
+// @mixin mediaQuery($min-width) {
+//     @media screen and (min-width: #{$min-width}) {
+//         @content;
+//     }
+// }
+//
+// @import 'node_modules/@salesforce-ux/design-system/scss/index';
